@@ -1,0 +1,35 @@
+version: "2.4"
+services:
+  category-service:
+    build: ./category-service
+    ports:
+      - "9081:9081"
+    depends_on:
+      - naming-server
+
+  # Gateway
+  api-gateway:
+    build: ./api-gateway
+    depends_on:
+      - naming-server
+
+  # Mysql
+  ajustadoati-db:
+    build: ./mysql
+    volumes:
+      - my-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Dexter876.
+      - MYSQL_DATABASE=task
+    ports:
+      - 3306:3306
+
+  # Eureka Server
+  naming-server:
+    build: ./naming-server
+    ports:
+      - 9061:9061
+
+  # Names our volume
+  volumes:
+    my-db:

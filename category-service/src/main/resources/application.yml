@@ -1,0 +1,37 @@
+# Data properties
+domain:
+  datasource:
+    driver-class: com.mysql.jdbc.Driver
+
+# Spring Properties
+spring:
+  datasource:
+    password: Dexter876.
+    url: jdbc:mysql://localhost:3306/ajustadoati?useSSL=false
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.MySQLDialect
+  application:
+    name: category-service
+  profiles:
+    active: dev
+  main:
+    banner-mode: "off"
+  cloud:
+    config:
+      enabled: false
+
+
+# Pom Version
+app:
+  version: '@pom.version@'
+
+# Server Properties
+server:
+  port: ${PORT:0} # Random Port
+  servlet:
+    context-path: /suite/category-service/v0
+
+

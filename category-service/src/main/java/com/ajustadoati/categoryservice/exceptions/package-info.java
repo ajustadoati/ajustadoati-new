@@ -1,0 +1,1 @@
+package com.ajustadoati.categoryservice.exceptions;
