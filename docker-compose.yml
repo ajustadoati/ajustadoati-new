@@ -3,21 +3,24 @@ services:
   category-service:
     build: ./category-service
     ports:
-      - "9081:9081"
+      - 9081:9081
     depends_on:
       - naming-server
+      - ajustadoati-db
 
   # Gateway
   api-gateway:
     build: ./api-gateway
     depends_on:
       - naming-server
+    ports:
+      - 9080:9080
 
   # Mysql
   ajustadoati-db:
     build: ./mysql
     volumes:
-      - my-db:/var/lib/mysql
+      - /Users/richardroj/mysql-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=Dexter876.
       - MYSQL_DATABASE=task
@@ -30,6 +33,3 @@ services:
     ports:
       - 9061:9061
 
-  # Names our volume
-  volumes:
-    my-db:

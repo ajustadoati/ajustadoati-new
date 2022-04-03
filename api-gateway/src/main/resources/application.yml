@@ -1,0 +1,35 @@
+server:
+  port: 9080
+
+category-service: lb://category-service
+
+eureka:
+  instance:
+    preferIpAddress: true
+
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active: dev
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    use-root-path: true
+    urls:
+      - name: category-service
+        url: /suite/category-service/v0/v3/api-docs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

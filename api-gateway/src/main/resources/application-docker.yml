@@ -1,0 +1,28 @@
+logging:
+  level:
+    root: INFO
+    reactor:
+      netty: DEBUG
+    org:
+      springframework:
+        cloud:
+          gateway: TRACE
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://naming-server:9061/eureka}
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: category-service-route
+          uri: ${category-service}
+          predicates:
+            - Path=/suite/category-service/**
+        - id: openapi
+          uri: http://api-gateway:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
